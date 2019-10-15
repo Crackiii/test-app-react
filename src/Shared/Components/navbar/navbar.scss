@@ -1,0 +1,29 @@
+@import '../../../index.scss';
+
+.todos-Nav{
+    background: $siteColor;
+    padding:15px 10px;
+    ul{
+        margin-bottom: 0px;
+        li{
+            display: inline-block;
+            a{
+                display: block;
+                color: #fff;
+                font-size: 0.875rem;
+                padding:5px 20px;
+                padding-bottom: 3px;
+                border-radius: 50px;
+                border: 1px solid rgba(255, 255, 255, 0.342);
+                margin-right: 5px;
+                letter-spacing: 2px;
+                &.activeLink{
+                    border-color: #fff;
+                    background-color: #fff;
+                    color: #000;
+                }
+            }
+            
+        }
+    }
+}

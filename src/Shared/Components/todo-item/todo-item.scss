@@ -1,0 +1,35 @@
+.todo-item{
+    width: 100%;
+    background-color: #fff;
+    padding: 10px;
+    margin-top: 30px;
+    border-radius: 5px;
+
+    .todo-title{
+        padding-bottom: 10px;
+        font-weight: 700;
+    }
+
+    .todo-desc{
+        font-size: 13px;
+        color: #666;
+        padding-bottom: 20px;
+    }
+
+    .todo-date{
+        font-size: 11px;
+        color: #666;
+        text-align: right;
+    }
+
+    .todo-controls{
+
+        .btn{
+            font-size: 10px;
+            padding: 5px;
+            text-transform: none;
+            font-weight: normal;
+            cursor: pointer;
+        }
+    }
+}

@@ -3,10 +3,18 @@ import ReactDOM from 'react-dom';
 import './index.scss';
 import App from './Index Components/app';
 import * as serviceWorker from './serviceWorker';
+import './Assets/css/argon.css'
+import './Assets/css/bootstrap-grid.css'
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import {BrowserRouter as Router, Route, Redirect} from 'react-router-dom'
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
+ReactDOM.render(
+    
+    <Router>
+        <Route exact path="/" render={ () => <Redirect to="/app" /> } />
+        <Route path="/app" component={App} />
+    </Router>
+    
+    , document.getElementById('root'));
+
 serviceWorker.unregister();
