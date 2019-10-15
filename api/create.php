@@ -2,8 +2,6 @@
 
 
 
-echo json_encode(array("list":true))
-
 $sql = "INSERT INTO todo_items (`title`, `description`, `timestamp`) VALUES(
     '".$data->todo_title."', '".$data->todo_desc."', '".$data->timestamp."'
 )";

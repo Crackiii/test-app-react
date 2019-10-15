@@ -8,7 +8,8 @@ export class todo extends Component {
         super(props)
     
         this.state = {
-             
+             todos : [],
+             noData : false
         }
     }
 
@@ -23,9 +24,22 @@ export class todo extends Component {
                 operation : "list"
             })
         })
+        // .then(r => {
+        //     r.text().then(res => {
+        //         console.log(res);
+        //     })
+        // })
         .then( j => j.json() )
         .then( response => {
-            console.log(response)
+            if(response.length > 0){
+                this.setState({
+                    todos : response
+                })
+            } else{
+                this.setState({
+                    noData : true
+                })
+            }
         })
 
     }
@@ -34,15 +48,16 @@ export class todo extends Component {
         return (
             <div className="container-fluid">
                 <div className="row">
-                    <div className="col-sm-12 col-md-4 col-lg-3"> <TodoItem /> </div>
-                    <div className="col-sm-12 col-md-4 col-lg-3"> <TodoItem /> </div>
-                    <div className="col-sm-12 col-md-4 col-lg-3"> <TodoItem /> </div>
-                    <div className="col-sm-12 col-md-4 col-lg-3"> <TodoItem /> </div>
-                    <div className="col-sm-12 col-md-4 col-lg-3"> <TodoItem /> </div>
-                    <div className="col-sm-12 col-md-4 col-lg-3"> <TodoItem /> </div>
-                    <div className="col-sm-12 col-md-4 col-lg-3"> <TodoItem /> </div>
-                    <div className="col-sm-12 col-md-4 col-lg-3"> <TodoItem /> </div>
-                    <div className="col-sm-12 col-md-4 col-lg-3"> <TodoItem /> </div>
+                    {
+                        !this.state.noData ?
+                        this.state.todos.map( (data, idx) => {
+                            return(
+                                <div className="col-sm-12 col-md-4 col-lg-3" key={idx}> <TodoItem data={data} /> </div>
+                            )
+                        }) : 
+
+                        <h3>No Data Found !</h3>
+                    }
                 </div>
             </div>
         )
