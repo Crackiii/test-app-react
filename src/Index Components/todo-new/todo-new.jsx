@@ -1,17 +1,23 @@
 import React, { Component } from 'react'
 import './todo-new.scss'
 
+import {httpPost} from '../../Shared/Services/ajax'
+
 export class TodoNew extends Component {
     constructor(props) {
         super(props)
     
         this.state = {
-            todo_title : '',
-            todo_desc : ''
+            todo_title : this.props.title || '',
+            todo_desc : this.props.desc || ''
         }
 
         this.todoNewSubmit = this.todoNewSubmit.bind(this)
         this.handleTodoInput = this.handleTodoInput.bind(this)
+    }
+
+    componentDidMount(){
+        console.log(this.props)
     }
 
     flushState(){
@@ -27,26 +33,27 @@ export class TodoNew extends Component {
         })
     }
 
-    todoNewSubmit(event){
+
+    async todoNewSubmit(event){
         event.preventDefault()
 
-        fetch("http://localhost:8080/Work/Face44%20Coding%20Challenge/React%20Version/TodoApp-Test-REACT-VERSION-Face44/api/index.php",{
-            method : "POST",
-            headers : {
-                "Content-Type" : "application/json"
-            },
-            body : JSON.stringify({
-                ...this.state,
-                timestamp: new Date().getTime(),
-                operation : "create"
+        if(this.state.todo_title === "" && this.state.todo_desc === ""){
+            return
+        } else{
+            const response = await httpPost(this.props.operation || "create", {
+                todo_title : this.state.todo_title,
+                todo_desc : this.state.todo_desc,
+                id : Number(this.props.id),
+                timestamp: new Date().getTime()
             })
-        })
-        .then( j => j.json() )
-        .then( response => {
-            if(response.inserted){
+            if(response.inserted || response.updated){
+                if(this.props.didUpdated){
+                    this.props.didUpdated()
+                }
                 this.flushState()
             }
-        })
+            console.log(response);
+        }
 
     }
     

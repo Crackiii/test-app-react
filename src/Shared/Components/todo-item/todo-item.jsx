@@ -1,15 +1,33 @@
 import React, { Component } from 'react'
 import './todo-item.scss'
 
+
 export class TodoItem extends Component {
     constructor(props) {
         super(props)
     
         this.state = {
-             
+             itemData : ''
         }
+
+        this.updateItem = this.updateItem.bind(this)
+        this.deleteItem = this.deleteItem.bind(this)
+    }
+
+    componentDidMount(){
+        this.setState({
+            itemData : this.props.data
+        })
+    }
+
+    updateItem(){
+        this.props.onUpdate(this.state.itemData)
     }
     
+    deleteItem(){
+        this.props.onDelete(this.state.itemData)
+    }
+
     render() {
         return (
             <div className="todo-item">
@@ -24,8 +42,8 @@ export class TodoItem extends Component {
                     } 
                 </div>
                 <div className="todo-controls">
-                    <span className="btn btn-primary" > Update </span>
-                    <span className="btn btn-danger"> Delete </span>
+                    <span className="btn btn-primary" onClick={this.updateItem} > Update </span>
+                    <span className="btn btn-danger" onClick={this.deleteItem}> Delete </span>
                 </div>
             </div>
         )
