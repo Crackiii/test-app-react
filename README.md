@@ -12,6 +12,6 @@ To Serve the application `npm start`
 
 # Database
 
-The database file is inclued in the `/api` folder. You can import that file in your **phpmyadmin**.
+The database files are included in the `/api` folder. You can import that file in your **phpmyadmin**.
 
 > Make sure you change the base URL in the `/src/shared` to the server link, from where you want to serve the `/api/*.php` files.
